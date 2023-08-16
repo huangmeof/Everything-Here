@@ -42,7 +42,7 @@ public class Player : Character
 
         isGrounded = CheckGrounded();
        
-        //horizontal = Input.GetAxisRaw("Horizontal"); // -1 -> 0 -> 1
+        horizontal = Input.GetAxisRaw("Horizontal"); // -1 -> 0 -> 1
         //verticle = Input.GetAxisRaw("verticle"); di chuyen chieu doc (len, xuong)
 
         if (isAttack )
