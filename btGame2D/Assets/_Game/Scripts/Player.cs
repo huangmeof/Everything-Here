@@ -58,7 +58,7 @@ public class Player : Character
             }
 
             //Jump
-            if (Input.GetKeyDown(KeyCode.K) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 Jump();
             }
@@ -107,11 +107,9 @@ public class Player : Character
     {
         base.OnInit();
         isAttack = false;
-
         transform.position = savePoint;
         ChangeAnim("idle");
         DeActiveAttack();
-
         SavePoint();
         UIManager.instance.SetCoins(Coins);
     }
@@ -124,6 +122,7 @@ public class Player : Character
 
     protected override void OnDeath()
     {
+        
         base.OnDeath();
     }
 
@@ -133,16 +132,16 @@ public class Player : Character
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);
 
-        //if (hit.collider != null )
-        //{
-        //    return true;
-        //}
-        //else
-        //{
-        //    return false;
-        //}
+        if (hit.collider != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
-        return hit.collider != null;
+        //return hit.collider != null;
     }
 
     public void Attack()
@@ -163,17 +162,20 @@ public class Player : Character
         Instantiate(kunaiPrefab, throwPoint.position, throwPoint.rotation);
     }
 
-    private void ResetAttack()
+    public void ResetAttack()
     {
         isAttack = false;
-        ChangeAnim("ilde");
+        ChangeAnim("idle");
     }
 
     public void Jump()
     {
-        isJumping = true;
-        ChangeAnim("jump");
-        rb.AddForce(jumpForce * Vector2.up);
+        if (isGrounded)
+        {
+            isJumping = true;
+            ChangeAnim("jump");
+            rb.AddForce(jumpForce * Vector2.up);
+        }
     }
 
     internal void SavePoint()
@@ -212,6 +214,4 @@ public class Player : Character
             Invoke(nameof(OnInit), 1f);
         }
     }
-
-    
 }

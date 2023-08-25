@@ -15,7 +15,7 @@ public class Kunai : MonoBehaviour
     public void OnInit()
     {
         rb.velocity = transform.right * 5f;
-        Invoke(nameof(OnDespawn), 4f);
+        Invoke(nameof(OnDespawn), 2f);
     }
 
     public void OnDespawn()

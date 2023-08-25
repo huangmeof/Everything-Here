@@ -41,6 +41,7 @@ public class Enemy : Character
     protected override void OnDeath()
     {
         ChangeState(null);
+        rb.velocity = Vector2.zero;
         base.OnDeath();
     }
 
@@ -77,7 +78,6 @@ public class Enemy : Character
     public void Moving()
     {
         ChangeAnim("run");
-
         rb.velocity = transform.right * moveSpeed;
     }
 
