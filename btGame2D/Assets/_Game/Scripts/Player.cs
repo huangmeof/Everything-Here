@@ -20,6 +20,7 @@ public class Player : Character
     private bool isJumping = false ;
     private bool isAttack = false;
     private bool isDead = false;
+    private bool isCanMove = true;
 
     private float horizontal;
 
@@ -107,6 +108,7 @@ public class Player : Character
     {
         base.OnInit();
         isAttack = false;
+        isDead = false;
         transform.position = savePoint;
         ChangeAnim("idle");
         DeActiveAttack();
@@ -124,6 +126,7 @@ public class Player : Character
     {
         
         base.OnDeath();
+        isDead = true;
     }
 
     private bool CheckGrounded()
